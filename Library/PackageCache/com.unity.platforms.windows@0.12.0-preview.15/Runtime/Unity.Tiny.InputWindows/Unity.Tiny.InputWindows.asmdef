@@ -1,0 +1,17 @@
+{
+    "name": "Unity.Tiny.InputWindows",
+    "references": [
+      "Unity.Entities",
+      "Unity.Mathematics",
+      "Unity.Tiny.Core",
+      "Unity.Collections",
+      "Unity.Platforms.Common",
+      "Unity.Tiny.GLFW",
+      "Unity.Tiny.Input.GLFW",
+      "Unity.Tiny.Input"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [ "WindowsStandalone32", "WindowsStandalone64" ],
+    "allowUnsafeCode": true,
+    "defineConstraints": ["UNITY_DOTSRUNTIME"]
+}

@@ -1,0 +1,70 @@
+using System.Runtime.CompilerServices;
+using Unity.Entities;
+using Unity.Jobs;
+
+[CompilerGenerated]
+public class JobEntity_WithIntParamsAndDynamicBuffer : SystemBase
+{
+	private EndSimulationEntityCommandBufferSystem _DespawnBarrier;
+
+	private EntityQuery __generatedQuery_0;
+
+	private ComponentTypeHandle<Translation> Translation_RW_ComponentTypeHandle;
+
+	private ComponentTypeHandle<VehiclePathing> VehiclePathing_RO_ComponentTypeHandle;
+
+	protected override void OnCreate()
+	{
+		base.OnCreate();
+		_DespawnBarrier = base.World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+	}
+
+	protected override void OnUpdate()
+	{
+		VehicleDespawnJob vehicleDespawnJob = default(VehicleDespawnJob);
+		vehicleDespawnJob.EntityCommandBuffer = _DespawnBarrier.CreateCommandBuffer().AsParallelWriter();
+		VehicleDespawnJob vehicleDespawnJob2 = vehicleDespawnJob;
+		base.Dependency = vehicleDespawnJob2.ScheduleParallel(base.Dependency);
+	}
+
+	[DOTSCompilerPatchedMethod("OnUpdate")]
+	protected void __OnUpdate_464749F()
+	{
+		VehicleDespawnJob vehicleDespawnJob = default(VehicleDespawnJob);
+		vehicleDespawnJob.EntityCommandBuffer = _DespawnBarrier.CreateCommandBuffer().AsParallelWriter();
+		VehicleDespawnJob job = vehicleDespawnJob;
+		base.Dependency = __ScheduleViaJobEntityBatchIndexExtension_0(job, __generatedQuery_0, base.Dependency);
+	}
+
+	protected override void OnCreateForCompiler()
+	{
+		base.OnCreateForCompiler();
+		Translation_RW_ComponentTypeHandle = GetComponentTypeHandle<Translation>();
+		VehiclePathing_RO_ComponentTypeHandle = GetComponentTypeHandle<VehiclePathing>(isReadOnly: true);
+		__generatedQuery_0 = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[4]
+			{
+				ComponentType.ReadWrite<Entity>(),
+				ComponentType.ReadOnly<MyBufferInt>(),
+				ComponentType.ReadWrite<Translation>(),
+				ComponentType.ReadOnly<VehiclePathing>()
+			},
+			Any = new ComponentType[0],
+			None = new ComponentType[0],
+			Options = EntityQueryOptions.IncludeDisabled
+		});
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private JobHandle __ScheduleViaJobEntityBatchIndexExtension_0(VehicleDespawnJob job, EntityQuery entityQuery, JobHandle dependency)
+	{
+		Translation_RW_ComponentTypeHandle.Update(this);
+		VehiclePathing_RO_ComponentTypeHandle.Update(this);
+		job.__EntityTypeHandle = GetEntityTypeHandle();
+		job.__MyBufferIntTypeHandle = GetBufferTypeHandle<MyBufferInt>(isReadOnly: true);
+		job.__TranslationTypeHandle = Translation_RW_ComponentTypeHandle;
+		job.__VehiclePathingTypeHandle = VehiclePathing_RO_ComponentTypeHandle;
+		return JobEntityBatchIndexExtensions.ScheduleParallel(job, entityQuery, dependency);
+	}
+}

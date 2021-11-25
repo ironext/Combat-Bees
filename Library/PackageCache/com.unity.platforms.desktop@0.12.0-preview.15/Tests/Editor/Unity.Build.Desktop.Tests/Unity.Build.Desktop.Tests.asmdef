@@ -1,0 +1,14 @@
+{
+    "name": "Unity.Build.Desktop.Tests",
+    "references": [
+        "Unity.Build"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

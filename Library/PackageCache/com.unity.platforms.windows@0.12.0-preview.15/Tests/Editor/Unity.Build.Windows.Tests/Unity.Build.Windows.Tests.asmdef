@@ -1,0 +1,16 @@
+{
+    "name": "Unity.Build.Windows.Tests",
+    "references": [
+        "Unity.Build",
+        "Unity.Build.Editor",
+        "Unity.Serialization"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

@@ -1,0 +1,349 @@
+using AOT;
+using System;
+using System.Runtime.CompilerServices;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Entities;
+using Unity.Entities.CodeGen.Tests;
+using Unity.Entities.CodeGeneratedJobForEach;
+using Unity.Entities.Tests;
+using Unity.Entities.UniversalDelegates;
+using Unity.Jobs;
+using Unity.Jobs.LowLevel.Unsafe;
+
+[CompilerGenerated]
+internal class LambdaJobsInJobComponentSystem : JobComponentSystem
+{
+	[NoAlias]
+	[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+	private struct LambdaJobsInJobComponentSystem_LambdaJob_0_Job : IJobEntityBatchWithIndex
+	{
+		internal static InternalCompilerInterface.JobEntityBatchRunWithoutJobSystemDelegate FunctionPtrFieldNoBurst;
+
+		internal static InternalCompilerInterface.JobEntityBatchRunWithoutJobSystemDelegate FunctionPtrFieldBurst;
+
+		[ReadOnly]
+		public EntityTypeHandle __myEntityTypeHandle;
+
+		public ComponentTypeHandle<Translation> __translationTypeHandle;
+
+		[ReadOnly]
+		public ComponentTypeHandle<Acceleration> __accelerationTypeHandle;
+
+		public BufferTypeHandle<MyBufferFloat> __myBufferFloatTypeHandle;
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private void OriginalLambdaBody(int entityInQueryIndex, Entity myEntity, [NoAlias] ref Translation translation, [NoAlias] in Acceleration acceleration, DynamicBuffer<MyBufferFloat> myBufferFloat)
+		{
+		}
+
+		public void Execute(ArchetypeChunk chunk, int batchIndex, int indexOfFirstEntityInQuery)
+		{
+			IntPtr nativeArrayPtr = InternalCompilerInterface.UnsafeGetChunkEntityArrayIntPtr(chunk, __myEntityTypeHandle);
+			IntPtr nativeArrayPtr2 = InternalCompilerInterface.UnsafeGetChunkNativeArrayIntPtr(chunk, __translationTypeHandle);
+			IntPtr nativeArrayPtr3 = InternalCompilerInterface.UnsafeGetChunkNativeArrayReadOnlyIntPtr(chunk, __accelerationTypeHandle);
+			BufferAccessor<MyBufferFloat> bufferAccessor = chunk.GetBufferAccessor(__myBufferFloatTypeHandle);
+			int count = chunk.Count;
+			for (int i = 0; i != count; i++)
+			{
+				int entityInQueryIndex = indexOfFirstEntityInQuery + i;
+				OriginalLambdaBody(entityInQueryIndex, InternalCompilerInterface.UnsafeGetCopyOfNativeArrayPtrElement<Entity>(nativeArrayPtr, i), ref InternalCompilerInterface.UnsafeGetRefToNativeArrayPtrElement<Translation>(nativeArrayPtr2, i), in InternalCompilerInterface.UnsafeGetRefToNativeArrayPtrElement<Acceleration>(nativeArrayPtr3, i), bufferAccessor[i]);
+			}
+		}
+
+		[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+		[MonoPInvokeCallback(typeof(InternalCompilerInterface.JobEntityBatchRunWithoutJobSystemDelegate))]
+		public static void RunWithoutJobSystem(ref ArchetypeChunkIterator archetypeChunkIterator, IntPtr jobPtr)
+		{
+			try
+			{
+				JobEntityBatchIndexExtensions.RunWithoutJobsInternal(ref InternalCompilerInterface.UnsafeAsRef<LambdaJobsInJobComponentSystem_LambdaJob_0_Job>(jobPtr), ref archetypeChunkIterator);
+			}
+			finally
+			{
+			}
+		}
+	}
+
+	[NoAlias]
+	[BurstCompile(FloatMode = FloatMode.Deterministic, FloatPrecision = FloatPrecision.High, CompileSynchronously = true)]
+	private struct LambdaJobsInJobComponentSystem_LambdaJob_1_Job : IJobEntityBatchWithIndex
+	{
+		[ReadOnly]
+		[NativeDisableContainerSafetyRestriction]
+		[DeallocateOnJobCompletion]
+		public NativeArray<float> innerCapturedFloats;
+
+		[NativeDisableUnsafePtrRestriction]
+		public unsafe byte* innerRawPtr;
+
+		public float innerScopeFloat;
+
+		[ReadOnly]
+		public EntityTypeHandle __myEntityTypeHandle;
+
+		public BufferTypeHandle<MyBufferInt> __myBufferIntsTypeHandle;
+
+		public ComponentTypeHandle<Translation> __translationTypeHandle;
+
+		[ReadOnly]
+		public ComponentTypeHandle<Acceleration> __accelerationTypeHandle;
+
+		public BufferTypeHandle<MyBufferFloat> __myBufferFloatTypeHandle;
+
+		private EcsTestData LocalMethodThatReturnsValue()
+		{
+			return default(EcsTestData);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private unsafe void OriginalLambdaBody(int entityInQueryIndex, Entity myEntity, DynamicBuffer<MyBufferInt> myBufferInts, [NoAlias] ref Translation translation, [NoAlias] in Acceleration acceleration, DynamicBuffer<MyBufferFloat> myBufferFloat)
+		{
+			LocalMethodThatReturnsValue();
+			translation.Value += innerCapturedFloats[2] + acceleration.Value + (float)entityInQueryIndex + (float)myEntity.Version + (float)myBufferInts[2].Value + innerScopeFloat + myBufferFloat[0].Value;
+			Console.Write(innerRawPtr->ToString());
+		}
+
+		public void Execute(ArchetypeChunk chunk, int batchIndex, int indexOfFirstEntityInQuery)
+		{
+			IntPtr nativeArrayPtr = InternalCompilerInterface.UnsafeGetChunkEntityArrayIntPtr(chunk, __myEntityTypeHandle);
+			BufferAccessor<MyBufferInt> bufferAccessor = chunk.GetBufferAccessor(__myBufferIntsTypeHandle);
+			IntPtr nativeArrayPtr2 = InternalCompilerInterface.UnsafeGetChunkNativeArrayIntPtr(chunk, __translationTypeHandle);
+			IntPtr nativeArrayPtr3 = InternalCompilerInterface.UnsafeGetChunkNativeArrayReadOnlyIntPtr(chunk, __accelerationTypeHandle);
+			BufferAccessor<MyBufferFloat> bufferAccessor2 = chunk.GetBufferAccessor(__myBufferFloatTypeHandle);
+			int count = chunk.Count;
+			for (int i = 0; i != count; i++)
+			{
+				int entityInQueryIndex = indexOfFirstEntityInQuery + i;
+				OriginalLambdaBody(entityInQueryIndex, InternalCompilerInterface.UnsafeGetCopyOfNativeArrayPtrElement<Entity>(nativeArrayPtr, i), bufferAccessor[i], ref InternalCompilerInterface.UnsafeGetRefToNativeArrayPtrElement<Translation>(nativeArrayPtr2, i), in InternalCompilerInterface.UnsafeGetRefToNativeArrayPtrElement<Acceleration>(nativeArrayPtr3, i), bufferAccessor2[i]);
+			}
+		}
+	}
+
+	[NoAlias]
+	[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+	private struct LambdaJobsInJobComponentSystem_LambdaJob_2_Job : IJob
+	{
+		internal static InternalCompilerInterface.JobRunWithoutJobSystemDelegate FunctionPtrFieldNoBurst;
+
+		internal static InternalCompilerInterface.JobRunWithoutJobSystemDelegate FunctionPtrFieldBurst;
+
+		public NativeArray<float> innerCapturedFloats;
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private void OriginalLambdaBody()
+		{
+			innerCapturedFloats[0] = 3f;
+		}
+
+		public void Execute()
+		{
+			OriginalLambdaBody();
+		}
+
+		[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+		[MonoPInvokeCallback(typeof(InternalCompilerInterface.JobRunWithoutJobSystemDelegate))]
+		public static void RunWithoutJobSystem(IntPtr jobPtr)
+		{
+			try
+			{
+				InternalCompilerInterface.UnsafeAsRef<LambdaJobsInJobComponentSystem_LambdaJob_2_Job>(jobPtr).OriginalLambdaBody();
+			}
+			finally
+			{
+			}
+		}
+	}
+
+	[NoAlias]
+	[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+	private struct LambdaJobsInJobComponentSystem_LambdaJob_3_Job : IJob
+	{
+		public NativeArray<float> innerCapturedFloats;
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private void OriginalLambdaBody()
+		{
+			innerCapturedFloats[0] = 5f;
+		}
+
+		public void Execute()
+		{
+			OriginalLambdaBody();
+		}
+	}
+
+	private EntityQuery m_Query;
+
+	private EntityQuery LambdaJobsInJobComponentSystem_LambdaJob_0_Query;
+
+	private EntityQuery LambdaJobsInJobComponentSystem_LambdaJob_1_Query;
+
+	private ComponentTypeHandle<Translation> __Unity_Entities_CodeGen_Tests_Translation_RW_ComponentTypeHandle;
+
+	private ComponentTypeHandle<Acceleration> __Unity_Entities_CodeGen_Tests_Acceleration_RO_ComponentTypeHandle;
+
+	protected unsafe override JobHandle OnUpdate(JobHandle inputDeps)
+	{
+		NativeArray<float> innerCapturedFloats = new NativeArray<float>(1, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);
+		innerCapturedFloats[0] = 456f;
+		byte* innerRawPtr = (byte*)(void*)IntPtr.Zero;
+		float innerScopeFloat = 2f;
+		LambdaSingleJobDescriptionExecutionMethodsJCS.Run(base.Job.WithCode(delegate
+		{
+			innerCapturedFloats[0] = 3f;
+		}));
+		LambdaJobDescriptionExecutionMethodsJCS.Run(base.Entities.ForEach((VVRII<int, Entity, Translation, Acceleration, DynamicBuffer<MyBufferFloat>>)delegate
+		{
+		}));
+		JobHandle dependency = LambdaSingleJobDescriptionExecutionMethodsJCS.Schedule(base.Job.WithCode(delegate
+		{
+			innerCapturedFloats[0] = 5f;
+		}), inputDeps);
+		return LambdaJobDescriptionExecutionMethodsJCS.Schedule(base.Entities.WithBurst(FloatMode.Deterministic, FloatPrecision.High, synchronousCompilation: true).WithEntityQueryOptions(EntityQueryOptions.IncludeDisabled).WithChangeFilter<Translation>()
+			.WithNone<Boid>()
+			.WithAll<Velocity>()
+			.WithReadOnly(innerCapturedFloats)
+			.WithDisposeOnCompletion(innerCapturedFloats)
+			.WithNativeDisableContainerSafetyRestriction(innerCapturedFloats)
+			.WithNativeDisableUnsafePtrRestriction<ForEachLambdaJobDescriptionJCS, byte>(innerRawPtr)
+			.WithStoreEntityQueryInField(ref m_Query)
+			.ForEach(delegate(int entityInQueryIndex, Entity myEntity, DynamicBuffer<MyBufferInt> myBufferInts, ref Translation translation, in Acceleration acceleration, in DynamicBuffer<MyBufferFloat> myBufferFloat)
+			{
+				LocalMethodThatReturnsValue();
+				translation.Value += innerCapturedFloats[2] + acceleration.Value + (float)entityInQueryIndex + (float)myEntity.Version + (float)myBufferInts[2].Value + innerScopeFloat + myBufferFloat[0].Value;
+				Console.Write(innerRawPtr->ToString());
+			}), dependency);
+		static EcsTestData LocalMethodThatReturnsValue()
+		{
+			return default(EcsTestData);
+		}
+	}
+
+	[DOTSCompilerPatchedMethod("OnUpdate_Unity.Jobs.JobHandle")]
+	protected unsafe JobHandle __OnUpdate_221D56EB(JobHandle inputDeps)
+	{
+		NativeArray<float> innerCapturedFloats = new NativeArray<float>(1, Allocator.TempJob, NativeArrayOptions.UninitializedMemory)
+		{
+			[0] = 456f
+		};
+		byte* innerRawPtr = (byte*)(void*)IntPtr.Zero;
+		float innerScopeFloat = 2f;
+		LambdaJobsInJobComponentSystem_LambdaJob_2_Execute(ref innerCapturedFloats);
+		LambdaJobsInJobComponentSystem_LambdaJob_0_Execute();
+		JobHandle _inputDependency = LambdaJobsInJobComponentSystem_LambdaJob_3_Execute(innerCapturedFloats, inputDeps);
+		return LambdaJobsInJobComponentSystem_LambdaJob_1_Execute(innerCapturedFloats, innerRawPtr, innerScopeFloat, _inputDependency);
+	}
+
+	private void LambdaJobsInJobComponentSystem_LambdaJob_0_Execute()
+	{
+		__Unity_Entities_CodeGen_Tests_Translation_RW_ComponentTypeHandle.Update(this);
+		__Unity_Entities_CodeGen_Tests_Acceleration_RO_ComponentTypeHandle.Update(this);
+		LambdaJobsInJobComponentSystem_LambdaJob_0_Job lambdaJobsInJobComponentSystem_LambdaJob_0_Job = default(LambdaJobsInJobComponentSystem_LambdaJob_0_Job);
+		lambdaJobsInJobComponentSystem_LambdaJob_0_Job.__myEntityTypeHandle = GetEntityTypeHandle();
+		lambdaJobsInJobComponentSystem_LambdaJob_0_Job.__translationTypeHandle = __Unity_Entities_CodeGen_Tests_Translation_RW_ComponentTypeHandle;
+		lambdaJobsInJobComponentSystem_LambdaJob_0_Job.__accelerationTypeHandle = __Unity_Entities_CodeGen_Tests_Acceleration_RO_ComponentTypeHandle;
+		lambdaJobsInJobComponentSystem_LambdaJob_0_Job.__myBufferFloatTypeHandle = GetBufferTypeHandle<MyBufferFloat>(isReadOnly: true);
+		LambdaJobsInJobComponentSystem_LambdaJob_0_Job jobData = lambdaJobsInJobComponentSystem_LambdaJob_0_Job;
+		InternalCompilerInterface.JobEntityBatchRunWithoutJobSystemDelegate functionPointer = JobsUtility.JobCompilerEnabled ? LambdaJobsInJobComponentSystem_LambdaJob_0_Job.FunctionPtrFieldBurst : LambdaJobsInJobComponentSystem_LambdaJob_0_Job.FunctionPtrFieldNoBurst;
+		InternalCompilerInterface.UnsafeRunJobEntityBatchWithIndex(ref jobData, LambdaJobsInJobComponentSystem_LambdaJob_0_Query, functionPointer);
+	}
+
+	private unsafe JobHandle LambdaJobsInJobComponentSystem_LambdaJob_1_Execute(NativeArray<float> innerCapturedFloats, byte* innerRawPtr, float innerScopeFloat, JobHandle __inputDependency)
+	{
+		__Unity_Entities_CodeGen_Tests_Translation_RW_ComponentTypeHandle.Update(this);
+		__Unity_Entities_CodeGen_Tests_Acceleration_RO_ComponentTypeHandle.Update(this);
+		LambdaJobsInJobComponentSystem_LambdaJob_1_Job lambdaJobsInJobComponentSystem_LambdaJob_1_Job = default(LambdaJobsInJobComponentSystem_LambdaJob_1_Job);
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.innerCapturedFloats = innerCapturedFloats;
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.innerRawPtr = innerRawPtr;
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.innerScopeFloat = innerScopeFloat;
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.__myEntityTypeHandle = GetEntityTypeHandle();
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.__myBufferIntsTypeHandle = GetBufferTypeHandle<MyBufferInt>();
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.__translationTypeHandle = __Unity_Entities_CodeGen_Tests_Translation_RW_ComponentTypeHandle;
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.__accelerationTypeHandle = __Unity_Entities_CodeGen_Tests_Acceleration_RO_ComponentTypeHandle;
+		lambdaJobsInJobComponentSystem_LambdaJob_1_Job.__myBufferFloatTypeHandle = GetBufferTypeHandle<MyBufferFloat>(isReadOnly: true);
+		LambdaJobsInJobComponentSystem_LambdaJob_1_Job jobData = lambdaJobsInJobComponentSystem_LambdaJob_1_Job;
+		return JobEntityBatchIndexExtensions.ScheduleParallel(jobData, LambdaJobsInJobComponentSystem_LambdaJob_1_Query, __inputDependency);
+	}
+
+	private void LambdaJobsInJobComponentSystem_LambdaJob_2_Execute(ref NativeArray<float> innerCapturedFloats)
+	{
+		LambdaJobsInJobComponentSystem_LambdaJob_2_Job lambdaJobsInJobComponentSystem_LambdaJob_2_Job = default(LambdaJobsInJobComponentSystem_LambdaJob_2_Job);
+		lambdaJobsInJobComponentSystem_LambdaJob_2_Job.innerCapturedFloats = innerCapturedFloats;
+		LambdaJobsInJobComponentSystem_LambdaJob_2_Job jobData = lambdaJobsInJobComponentSystem_LambdaJob_2_Job;
+		InternalCompilerInterface.JobRunWithoutJobSystemDelegate functionPointer = JobsUtility.JobCompilerEnabled ? LambdaJobsInJobComponentSystem_LambdaJob_2_Job.FunctionPtrFieldBurst : LambdaJobsInJobComponentSystem_LambdaJob_2_Job.FunctionPtrFieldNoBurst;
+		InternalCompilerInterface.UnsafeRunIJob(ref jobData, functionPointer);
+		innerCapturedFloats = jobData.innerCapturedFloats;
+	}
+
+	private JobHandle LambdaJobsInJobComponentSystem_LambdaJob_3_Execute(NativeArray<float> innerCapturedFloats, JobHandle __inputDependency)
+	{
+		LambdaJobsInJobComponentSystem_LambdaJob_3_Job lambdaJobsInJobComponentSystem_LambdaJob_3_Job = default(LambdaJobsInJobComponentSystem_LambdaJob_3_Job);
+		lambdaJobsInJobComponentSystem_LambdaJob_3_Job.innerCapturedFloats = innerCapturedFloats;
+		LambdaJobsInJobComponentSystem_LambdaJob_3_Job jobData = lambdaJobsInJobComponentSystem_LambdaJob_3_Job;
+		return IJobExtensions.Schedule(jobData, __inputDependency);
+	}
+
+	protected override void OnCreateForCompiler()
+	{
+		base.OnCreateForCompiler();
+		LambdaJobsInJobComponentSystem_LambdaJob_0_Query = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[3]
+			{
+				ComponentType.ReadOnly<Acceleration>(),
+				ComponentType.ReadOnly<MyBufferFloat>(),
+				ComponentType.ReadWrite<Translation>()
+			},
+			Any = new ComponentType[0],
+			None = new ComponentType[0],
+			Options = EntityQueryOptions.Default
+		});
+		m_Query = (LambdaJobsInJobComponentSystem_LambdaJob_1_Query = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[5]
+			{
+				ComponentType.ReadOnly<Acceleration>(),
+				ComponentType.ReadOnly<MyBufferFloat>(),
+				ComponentType.ReadOnly<Velocity>(),
+				ComponentType.ReadWrite<MyBufferInt>(),
+				ComponentType.ReadWrite<Translation>()
+			},
+			Any = new ComponentType[0],
+			None = new ComponentType[1]
+			{
+				ComponentType.ReadOnly<Boid>()
+			},
+			Options = EntityQueryOptions.IncludeDisabled
+		}));
+		LambdaJobsInJobComponentSystem_LambdaJob_1_Query.SetChangedVersionFilter(new ComponentType[1]
+		{
+			ComponentType.ReadWrite<Translation>()
+		});
+		__Unity_Entities_CodeGen_Tests_Translation_RW_ComponentTypeHandle = GetComponentTypeHandle<Translation>();
+		__Unity_Entities_CodeGen_Tests_Acceleration_RO_ComponentTypeHandle = GetComponentTypeHandle<Acceleration>(isReadOnly: true);
+		LambdaJobsInJobComponentSystem_LambdaJob_0_Job.FunctionPtrFieldNoBurst = delegate(ref ArchetypeChunkIterator archetypeChunkIterator, IntPtr jobPtr)
+		{
+			try
+			{
+				JobEntityBatchIndexExtensions.RunWithoutJobsInternal(ref InternalCompilerInterface.UnsafeAsRef<LambdaJobsInJobComponentSystem_LambdaJob_0_Job>(jobPtr), ref archetypeChunkIterator);
+			}
+			finally
+			{
+			}
+		};
+		LambdaJobsInJobComponentSystem_LambdaJob_0_Job.FunctionPtrFieldBurst = InternalCompilerInterface.BurstCompile(LambdaJobsInJobComponentSystem_LambdaJob_0_Job.FunctionPtrFieldNoBurst);
+		LambdaJobsInJobComponentSystem_LambdaJob_2_Job.FunctionPtrFieldNoBurst = delegate(IntPtr jobPtr)
+		{
+			try
+			{
+				InternalCompilerInterface.UnsafeAsRef<LambdaJobsInJobComponentSystem_LambdaJob_2_Job>(jobPtr).OriginalLambdaBody();
+			}
+			finally
+			{
+			}
+		};
+		LambdaJobsInJobComponentSystem_LambdaJob_2_Job.FunctionPtrFieldBurst = InternalCompilerInterface.BurstCompile(LambdaJobsInJobComponentSystem_LambdaJob_2_Job.FunctionPtrFieldNoBurst);
+	}
+}

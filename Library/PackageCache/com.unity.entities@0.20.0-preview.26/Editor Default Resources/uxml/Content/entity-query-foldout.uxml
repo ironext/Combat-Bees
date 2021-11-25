@@ -1,0 +1,7 @@
+<UXML xmlns:ui="UnityEngine.UIElements" xmlns:properties="Unity.Properties.UI">
+    <ui:VisualElement class="entity-query-foldout__system-icon" />
+    <ui:Label class="entity-query-foldout__system-name" text="SystemName"/>
+    <ui:VisualElement class="entity-query-foldout__query-icon" />
+    <ui:Label class="entity-query-foldout__query-name" text="QueryName" />
+    <ui:Label class="entity-query-foldout__entity-count" text="12"/>
+</UXML>

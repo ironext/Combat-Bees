@@ -1,0 +1,73 @@
+using System;
+using System.Runtime.CompilerServices;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
+
+[CompilerGenerated]
+public class SampleSystemModuleTest : SystemBase
+{
+	public struct SampleTranslation : IComponentData
+	{
+		public float3 Value;
+	}
+
+	public static class SampleHelper
+	{
+		public unsafe static T* GetComponentDataPtrOfFirstChunk<T>() where T : unmanaged, IComponentData
+		{
+			throw new Exception("Replaced with SourceGen");
+		}
+	}
+
+	private EntityQuery __query_0;
+
+	private ComponentTypeHandle<SampleTranslation> SampleSystemModuleTest_SampleTranslation_RW_ComponentTypeHandle;
+
+	protected override void OnCreate()
+	{
+		Entity entity = base.EntityManager.CreateEntity();
+		base.EntityManager.AddComponentData(entity, new SampleTranslation
+		{
+			Value = new float3(42)
+		});
+	}
+
+	protected unsafe override void OnUpdate()
+	{
+		SampleTranslation* componentDataPtrOfFirstChunk = SampleHelper.GetComponentDataPtrOfFirstChunk<SampleTranslation>();
+		SampleTranslation sampleTranslation = *componentDataPtrOfFirstChunk;
+	}
+
+	[DOTSCompilerPatchedMethod("OnUpdate")]
+	protected unsafe void __OnUpdate_13248FBE()
+	{
+		SampleTranslation* ptr = __GetComponentDataPtrOfFirstChunk__0();
+		SampleTranslation sampleTranslation = *ptr;
+	}
+
+	protected override void OnCreateForCompiler()
+	{
+		base.OnCreateForCompiler();
+		SampleSystemModuleTest_SampleTranslation_RW_ComponentTypeHandle = GetComponentTypeHandle<SampleTranslation>();
+		__query_0 = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[1]
+			{
+				ComponentType.ReadWrite<SampleTranslation>()
+			},
+			Any = new ComponentType[0],
+			None = new ComponentType[0],
+			Options = EntityQueryOptions.IncludeDisabled
+		});
+	}
+
+	private unsafe SampleTranslation* __GetComponentDataPtrOfFirstChunk__0()
+	{
+		SampleSystemModuleTest_SampleTranslation_RW_ComponentTypeHandle.Update(this);
+		NativeArray<ArchetypeChunk> nativeArray = __query_0.CreateArchetypeChunkArray(Allocator.Temp);
+		SampleTranslation* componentDataPtrRW = (SampleTranslation*)nativeArray[0].GetComponentDataPtrRW(ref SampleSystemModuleTest_SampleTranslation_RW_ComponentTypeHandle);
+		nativeArray.Dispose();
+		return componentDataPtrRW;
+	}
+}

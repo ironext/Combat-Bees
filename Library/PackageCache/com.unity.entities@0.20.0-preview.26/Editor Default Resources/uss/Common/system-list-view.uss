@@ -1,0 +1,6 @@
+
+.system-list-view__more-label {
+    -unity-text-align: middle-center;
+    white-space: normal;
+    padding: 10px;
+}

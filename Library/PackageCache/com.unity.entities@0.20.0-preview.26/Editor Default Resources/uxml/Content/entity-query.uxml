@@ -1,0 +1,8 @@
+<UXML xmlns:ui="UnityEngine.UIElements" xmlns:properties="Unity.Properties.UI">
+    <ui:VisualElement class="entity-query__foldout" />
+    <ui:VisualElement class="entity-query__search-element-container">
+        <properties:SearchElement search-data="EntityName" search-filters="c:ComponentCount i:Index id:InstanceId"
+                                  search-delay="200" handler-type="async" max-frame-time="1" />
+    </ui:VisualElement>
+    <ui:ListView class="entity-query__list-view" selection-type="Single" item-height="18" show-alternating-row-backgrounds="None" />
+</UXML>

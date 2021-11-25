@@ -1,0 +1,137 @@
+using System;
+using System.Runtime.CompilerServices;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Entities;
+using Unity.Jobs;
+
+namespace OuterNamespace.InnerNamespace
+{
+	[CompilerGenerated]
+	public class JobEntityAndForEach
+	{
+		[CompilerGenerated]
+		public class Child : JobComponentSystem
+		{
+			[NoAlias]
+			[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+			private struct Child_LambdaJob_0_Job : IJobEntityBatch
+			{
+				public ComponentTypeHandle<MyFirstClass.Translation> __translationTypeHandle;
+
+				[MethodImpl(MethodImplOptions.AggressiveInlining)]
+				private void OriginalLambdaBody([NoAlias] ref MyFirstClass.Translation translation)
+				{
+					translation.Value *= 1.2345f;
+				}
+
+				public void Execute(ArchetypeChunk chunk, int batchIndex)
+				{
+					IntPtr nativeArrayPtr = InternalCompilerInterface.UnsafeGetChunkNativeArrayIntPtr(chunk, __translationTypeHandle);
+					int count = chunk.Count;
+					for (int i = 0; i != count; i++)
+					{
+						OriginalLambdaBody(ref InternalCompilerInterface.UnsafeGetRefToNativeArrayPtrElement<MyFirstClass.Translation>(nativeArrayPtr, i));
+					}
+				}
+			}
+
+			[CompilerGenerated]
+			[NoAlias]
+			[BurstCompile(FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, CompileSynchronously = false)]
+			private struct MyEntityJob_Execute_0 : IJobEntityBatch
+			{
+				public MyFirstClass.MyEntityJob __JobData;
+
+				public ComponentTypeHandle<MyFirstClass.Rotation> __RotationTypeHandle;
+
+				[ReadOnly]
+				public ComponentTypeHandle<MyFirstClass.RotationSpeed_ForEach> __RotationSpeed_ForEachTypeHandle;
+
+				public unsafe void Execute(ArchetypeChunk batch, int batchIndex)
+				{
+					MyFirstClass.Rotation* unsafePtr = (MyFirstClass.Rotation*)batch.GetNativeArray(__RotationTypeHandle).GetUnsafePtr();
+					MyFirstClass.RotationSpeed_ForEach* unsafeReadOnlyPtr = (MyFirstClass.RotationSpeed_ForEach*)batch.GetNativeArray(__RotationSpeed_ForEachTypeHandle).GetUnsafeReadOnlyPtr();
+					for (int i = 0; i < batch.Count; i++)
+					{
+						__JobData.Execute(ref unsafePtr[i], in unsafeReadOnlyPtr[i]);
+					}
+				}
+			}
+
+			private EntityQuery Child_LambdaJob_0_Query;
+
+			private ComponentTypeHandle<MyFirstClass.Translation> __Child_LambdaJob_0_translation_OuterNamespace_InnerNamespace_MyFirstClass_TranslationTypeHandle_RW;
+
+			private EntityQuery Child_JobEntitiesForEach_0_Query;
+
+			protected override JobHandle OnUpdate(JobHandle inputDeps)
+			{
+				MyFirstClass.MyEntityJob myEntityJob = default(MyFirstClass.MyEntityJob);
+				myEntityJob.MyDeltaTime = base.Time.DeltaTime;
+				MyFirstClass.MyEntityJob entitiesForEachJob = myEntityJob;
+				JobHandle dependency = base.Entities.ForEach(entitiesForEachJob).ScheduleParallel(inputDeps);
+				return LambdaJobDescriptionExecutionMethodsJCS.Schedule(base.Entities.ForEach(delegate(ref MyFirstClass.Translation translation)
+				{
+					translation.Value *= 1.2345f;
+				}), dependency);
+			}
+
+			[DOTSCompilerPatchedMethod("OnUpdate")]
+			protected JobHandle __OnUpdate_6F1275B5(JobHandle inputDeps)
+			{
+				MyFirstClass.MyEntityJob myEntityJob = default(MyFirstClass.MyEntityJob);
+				myEntityJob.MyDeltaTime = base.Time.DeltaTime;
+				MyFirstClass.MyEntityJob _jobData = myEntityJob;
+				JobHandle _inputDependency = Child_JobEntitiesForEach_0_Execute(_jobData, inputDeps);
+				return Child_LambdaJob_0_Execute(_inputDependency);
+			}
+
+			private JobHandle Child_LambdaJob_0_Execute(JobHandle __inputDependency)
+			{
+				__Child_LambdaJob_0_translation_OuterNamespace_InnerNamespace_MyFirstClass_TranslationTypeHandle_RW.Update(this);
+				Child_LambdaJob_0_Job child_LambdaJob_0_Job = default(Child_LambdaJob_0_Job);
+				child_LambdaJob_0_Job.__translationTypeHandle = __Child_LambdaJob_0_translation_OuterNamespace_InnerNamespace_MyFirstClass_TranslationTypeHandle_RW;
+				Child_LambdaJob_0_Job jobData = child_LambdaJob_0_Job;
+				return JobEntityBatchExtensions.ScheduleParallel(jobData, Child_LambdaJob_0_Query, 1, __inputDependency);
+			}
+
+			private JobHandle Child_JobEntitiesForEach_0_Execute(MyFirstClass.MyEntityJob __jobData, JobHandle __inputDependency)
+			{
+				MyEntityJob_Execute_0 jobData = default(MyEntityJob_Execute_0);
+				jobData.__JobData = __jobData;
+				jobData.__RotationTypeHandle = GetComponentTypeHandle<MyFirstClass.Rotation>();
+				jobData.__RotationSpeed_ForEachTypeHandle = GetComponentTypeHandle<MyFirstClass.RotationSpeed_ForEach>(isReadOnly: true);
+				return JobEntityBatchExtensions.ScheduleParallel(jobData, Child_JobEntitiesForEach_0_Query, 1, __inputDependency);
+			}
+
+			protected override void OnCreateForCompiler()
+			{
+				base.OnCreateForCompiler();
+				Child_LambdaJob_0_Query = GetEntityQuery(new EntityQueryDesc
+				{
+					All = new ComponentType[1]
+					{
+						ComponentType.ReadWrite<MyFirstClass.Translation>()
+					},
+					Any = new ComponentType[0],
+					None = new ComponentType[0],
+					Options = EntityQueryOptions.Default
+				});
+				Child_JobEntitiesForEach_0_Query = GetEntityQuery(new EntityQueryDesc
+				{
+					All = new ComponentType[2]
+					{
+						ComponentType.ReadOnly<MyFirstClass.RotationSpeed_ForEach>(),
+						ComponentType.ReadWrite<MyFirstClass.Rotation>()
+					},
+					Any = new ComponentType[0],
+					None = new ComponentType[0],
+					Options = EntityQueryOptions.Default
+				});
+				__Child_LambdaJob_0_translation_OuterNamespace_InnerNamespace_MyFirstClass_TranslationTypeHandle_RW = GetComponentTypeHandle<MyFirstClass.Translation>();
+			}
+		}
+	}
+}

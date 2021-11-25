@@ -1,0 +1,91 @@
+using System.Runtime.CompilerServices;
+using Unity.Entities;
+using Unity.Jobs;
+
+[CompilerGenerated]
+public class JobEntity_WithMyManagedComponentSystem : SystemBase
+{
+	private EntityQuery __generatedQuery_0;
+
+	private ComponentTypeHandle<Rotation> Rotation_RW_ComponentTypeHandle;
+
+	private ComponentTypeHandle<RotationSpeed_ForEach> RotationSpeed_ForEach_RO_ComponentTypeHandle;
+
+	protected override void OnUpdate()
+	{
+		Job job = default(Job);
+		job.MyDeltaTime = base.Time.DeltaTime;
+		Job job2 = job;
+		EntityQuery entityQuery = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[4]
+			{
+				typeof(Rotation),
+				typeof(RotationSpeed_ForEach),
+				typeof(MyManagedComponent),
+				typeof(MustHaveComponent)
+			},
+			None = new ComponentType[1]
+			{
+				typeof(UndesiredComponent)
+			}
+		});
+		entityQuery.SetChangedVersionFilter(typeof(Translation));
+		job2.Run(entityQuery);
+	}
+
+	[DOTSCompilerPatchedMethod("OnUpdate")]
+	protected void __OnUpdate_7EF124B5()
+	{
+		Job job = default(Job);
+		job.MyDeltaTime = base.Time.DeltaTime;
+		Job job2 = job;
+		EntityQuery entityQuery = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[4]
+			{
+				typeof(Rotation),
+				typeof(RotationSpeed_ForEach),
+				typeof(MyManagedComponent),
+				typeof(MustHaveComponent)
+			},
+			None = new ComponentType[1]
+			{
+				typeof(UndesiredComponent)
+			}
+		});
+		entityQuery.SetChangedVersionFilter(typeof(Translation));
+		__ScheduleViaJobEntityBatchExtension_0(job2, entityQuery, default(JobHandle));
+	}
+
+	protected override void OnCreateForCompiler()
+	{
+		base.OnCreateForCompiler();
+		Rotation_RW_ComponentTypeHandle = GetComponentTypeHandle<Rotation>();
+		RotationSpeed_ForEach_RO_ComponentTypeHandle = GetComponentTypeHandle<RotationSpeed_ForEach>(isReadOnly: true);
+		__generatedQuery_0 = GetEntityQuery(new EntityQueryDesc
+		{
+			All = new ComponentType[3]
+			{
+				ComponentType.ReadWrite<Rotation>(),
+				ComponentType.ReadOnly<RotationSpeed_ForEach>(),
+				ComponentType.ReadWrite<MyManagedComponent>()
+			},
+			Any = new ComponentType[0],
+			None = new ComponentType[0],
+			Options = EntityQueryOptions.IncludeDisabled
+		});
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private void __ScheduleViaJobEntityBatchExtension_0(Job job, EntityQuery entityQuery, JobHandle dependency)
+	{
+		Rotation_RW_ComponentTypeHandle.Update(this);
+		RotationSpeed_ForEach_RO_ComponentTypeHandle.Update(this);
+		job.__EntityManager = base.EntityManager;
+		job.__RotationTypeHandle = Rotation_RW_ComponentTypeHandle;
+		job.__RotationSpeed_ForEachTypeHandle = RotationSpeed_ForEach_RO_ComponentTypeHandle;
+		job.__MyManagedComponentTypeHandle = base.EntityManager.GetComponentTypeHandle<MyManagedComponent>(isReadOnly: false);
+		JobEntityBatchExtensions.Run(job, entityQuery);
+	}
+}

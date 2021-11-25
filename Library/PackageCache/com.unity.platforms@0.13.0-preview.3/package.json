@@ -1,0 +1,26 @@
+{
+  "name": "com.unity.platforms",
+  "displayName": "Platforms",
+  "version": "0.13.0-preview.3",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "description": "Provides platform and build API foundation used by other platform packages.",
+  "keywords": [
+    "platform",
+    "build"
+  ],
+  "dependencies": {
+    "com.unity.properties": "1.7.0-preview",
+    "com.unity.properties.ui": "1.7.0-preview",
+    "com.unity.scriptablebuildpipeline": "1.19.1",
+    "com.unity.serialization": "1.7.0-preview.1"
+  },
+  "upmCi": {
+    "footprint": "7d1950e8eceb726b570f04e7583bd0ac6afc7d55"
+  },
+  "repository": {
+    "url": "https://github.cds.internal.unity3d.com/unity/dots.git",
+    "type": "git",
+    "revision": "ed149bd64edcb391d203b3abdd40fb728e4b2cd7"
+  }
+}

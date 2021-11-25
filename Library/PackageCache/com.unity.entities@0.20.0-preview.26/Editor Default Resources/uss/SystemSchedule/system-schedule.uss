@@ -1,0 +1,33 @@
+.system-schedule__root {
+    flex-grow: 1;
+}
+
+/**********************************************************************************************************************/
+/* TreeView Header                                                                                                    */
+/**********************************************************************************************************************/
+
+.system-schedule__tree-view__header {
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.system-schedule__tree-view__system-label {
+    padding-left: 25px;
+    flex-grow: 1;
+    width: 210px;
+}
+
+.system-schedule__tree-view__matches-label {
+    width: 65px;
+    border-left-width: 1px;
+    -unity-text-align: middle-center;
+}
+
+.system-schedule__tree-view__time-label {
+    width: 65px;
+    border-left-width: 1px;
+    -unity-text-align: middle-center;
+}
+
+

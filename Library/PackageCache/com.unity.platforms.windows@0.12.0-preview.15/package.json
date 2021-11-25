@@ -1,0 +1,26 @@
+{
+  "name": "com.unity.platforms.windows",
+  "displayName": "Platforms Windows",
+  "version": "0.12.0-preview.15",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "description": "Provides platform and build specific features for the Windows platform.",
+  "keywords": [
+    "platform",
+    "build",
+    "win",
+    "windows"
+  ],
+  "dependencies": {
+    "com.unity.platforms": "0.12.0-preview.15",
+    "com.unity.platforms.desktop": "0.12.0-preview.15"
+  },
+  "upmCi": {
+    "footprint": "2a135becbf091024397092c059605463a90b5c2c"
+  },
+  "repository": {
+    "url": "https://github.cds.internal.unity3d.com/unity/dots.git",
+    "type": "git",
+    "revision": "4f076678f455d1c5520be47648fb8100100011ec"
+  }
+}

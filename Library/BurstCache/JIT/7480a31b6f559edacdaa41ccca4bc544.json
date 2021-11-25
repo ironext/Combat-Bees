@@ -1,0 +1,12 @@
+{
+  "ExternalFunctions": [
+    {
+      "Name": "Unity.Jobs.LowLevel.Unsafe.JobsUtility::GetWorkStealingRange",
+      "FullName": "Unity.Jobs.LowLevel.Unsafe.JobsUtility.GetWorkStealingRange(ref Unity.Jobs.LowLevel.Unsafe.JobRanges ranges, int jobIndex, ref int beginIndex, ref int endIndex) -> bool_735a41dcab53e791192a77115a5514dc"
+    },
+    {
+      "Name": "burst_abort",
+      "FullName": "unused.burst_abort(System.String errorId, System.String message) -> void"
+    }
+  ]
+}

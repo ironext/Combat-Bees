@@ -1,0 +1,19 @@
+{
+    "name": "Unity.Build.Desktop.Classic",
+    "references": [
+        "Unity.Build",
+        "Unity.Build.Desktop",
+        "Unity.Build.Classic",
+        "Unity.Build.Classic.Private",
+        "Unity.Build.Editor",
+        "Unity.Properties",
+        "Unity.Serialization"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "overrideReferences": true,
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
